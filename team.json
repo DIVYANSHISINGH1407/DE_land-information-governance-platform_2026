@@ -1,0 +1,28 @@
+
+{
+  "team_number": "T0049",
+  "group_lead": {
+    "name": "Divyanshi singh",
+    "enrollment_no": "2501010155",
+    "github": "DIVYANSHISINGH1407"
+  },
+  "members": [
+    {
+      "name": "Ramni kaushik",
+      "enrollment_no": "2501010370",
+      "github": "ramnikaushik"
+    },
+    {
+      "name": "Prachi",
+      "enrollment_no": "2501010336",
+      "github": "PrachiSekera"
+    },
+    {
+      "name": "Aarya Upadhyay",
+      "enrollment_no": "2501010005",
+      "github": "aarya7u15"
+    }
+  ],
+  "postgres_version": "18.6",
+  "laptop_used_for_benchmarks": "MacBook Pro"
+}
