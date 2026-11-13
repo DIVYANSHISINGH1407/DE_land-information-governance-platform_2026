@@ -1,0 +1,33 @@
+=== W05 run 1 ===
+Update on bill_payments  (cost=0.00..808.00 rows=0 width=0) (actual time=2.120..2.120 rows=0.00 loops=1)
+  Buffers: shared hit=1942 dirtied=2 written=2
+  ->  Seq Scan on bill_payments  (cost=0.00..808.00 rows=1442 width=38) (actual time=0.006..1.385 rows=201.00 loops=1)
+        Filter: ((due_date < '2026-07-05'::date) AND (status = 'DUE'::text))
+        Rows Removed by Filter: 29799
+        Buffers: shared hit=358
+Planning:
+  Buffers: shared hit=66
+Planning Time: 0.180 ms
+Execution Time: 2.171 ms
+=== W05 run 2 ===
+Update on bill_payments  (cost=0.00..812.52 rows=0 width=0) (actual time=2.333..2.334 rows=0.00 loops=1)
+  Buffers: shared hit=1982 dirtied=2 written=2
+  ->  Seq Scan on bill_payments  (cost=0.00..812.52 rows=1450 width=38) (actual time=0.009..1.679 rows=201.00 loops=1)
+        Filter: ((due_date < '2026-07-05'::date) AND (status = 'DUE'::text))
+        Rows Removed by Filter: 29799
+        Buffers: shared hit=360
+Planning:
+  Buffers: shared hit=66
+Planning Time: 0.144 ms
+Execution Time: 2.381 ms
+=== W05 run 3 ===
+Update on bill_payments  (cost=0.00..817.02 rows=0 width=0) (actual time=2.004..2.005 rows=0.00 loops=1)
+  Buffers: shared hit=1986 dirtied=3 written=3
+  ->  Seq Scan on bill_payments  (cost=0.00..817.02 rows=1458 width=38) (actual time=0.008..1.446 rows=201.00 loops=1)
+        Filter: ((due_date < '2026-07-05'::date) AND (status = 'DUE'::text))
+        Rows Removed by Filter: 29799
+        Buffers: shared hit=362
+Planning:
+  Buffers: shared hit=66
+Planning Time: 0.156 ms
+Execution Time: 2.052 ms
