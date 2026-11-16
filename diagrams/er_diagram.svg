@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1460" height="1030" viewBox="0 0 1460 1030" role="img" aria-labelledby="title description">
+  <title id="title">Google Pay UPI database entity relationship diagram</title>
+  <desc id="description">Nine PostgreSQL entities and their foreign-key relationships. P2P payees may be external to the database.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .card { fill: #fff; stroke: #52657a; stroke-width: 1.5; rx: 8; }
+      .head { fill: #dce8f5; }
+      .name { font: bold 16px Arial, sans-serif; fill: #172b4d; }
+      .field { font: 13px Menlo, Consolas, monospace; fill: #243746; }
+      .rel { fill: none; stroke: #75869a; stroke-width: 1.8; }
+      .label { font: 12px Arial, sans-serif; fill: #40566d; }
+      .note { font: 13px Arial, sans-serif; fill: #40566d; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#75869a"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1460" height="1030"/>
+  <text x="30" y="30" class="name">Google Pay (UPI) database — entities and foreign keys</text>
+
+  <g class="rel" marker-end="url(#arrow)">
+    <path d="M260 105 L330 105"/>
+    <path d="M250 55 L250 40 L710 40 L710 55"/>
+    <path d="M350 240 C340 270 325 300 290 330"/>
+    <path d="M470 210 L470 350"/>
+    <path d="M310 435 L370 435"/>
+    <path d="M630 440 L1040 440"/>
+    <path d="M1020 150 C1170 190 1230 250 1230 330"/>
+    <path d="M600 240 L650 280 L650 660 L650 690"/>
+    <path d="M1080 600 C900 700 790 750 680 780"/>
+    <path d="M340 220 C350 400 340 550 300 690"/>
+    <path d="M620 170 C710 350 810 560 860 710"/>
+    <path d="M1250 620 C1150 675 1070 730 1020 770"/>
+  </g>
+  <g>
+    <text class="label" x="270" y="94">city_id</text>
+    <text class="label" x="430" y="35">city_id</text>
+    <text class="label" x="315" y="290">user_id</text>
+    <text class="label" x="660" y="570">user_id</text>
+    <text class="label" x="315" y="425">account_id + user_id</text>
+    <text class="label" x="795" y="430">payer_vpa</text>
+    <text class="label" x="1110" y="240">merchant_id + payee_vpa (P2M)</text>
+    <text class="label" x="340" y="580">user_id</text>
+    <text class="label" x="850" y="700">txn_id</text>
+    <text class="label" x="170" y="625">user_id</text>
+    <text class="label" x="720" y="430">user_id</text>
+    <text class="label" x="1110" y="690">txn_id</text>
+  </g>
+
+  <g transform="translate(30 55)">
+    <rect class="card" width="230" height="145"/><rect class="head" width="230" height="32" rx="8"/>
+    <text class="name" x="12" y="22">cities</text>
+    <text class="field" x="12" y="55">PK city_id : integer</text>
+    <text class="field" x="12" y="78">city_name : text</text>
+    <text class="field" x="12" y="101">state : text</text>
+  </g>
+  <g transform="translate(330 55)">
+    <rect class="card" width="300" height="185"/><rect class="head" width="300" height="32" rx="8"/>
+    <text class="name" x="12" y="22">users</text>
+    <text class="field" x="12" y="55">PK user_id : integer</text>
+    <text class="field" x="12" y="78">FK city_id : integer</text>
+    <text class="field" x="12" y="101">full_name, phone, email</text>
+    <text class="field" x="12" y="124">kyc_status, is_blocked</text>
+    <text class="field" x="12" y="147">created_at : timestamptz</text>
+  </g>
+  <g transform="translate(710 55)">
+    <rect class="card" width="310" height="175"/><rect class="head" width="310" height="32" rx="8"/>
+    <text class="name" x="12" y="22">merchants</text>
+    <text class="field" x="12" y="55">PK merchant_id : integer</text>
+    <text class="field" x="12" y="78">merchant_name, mcc</text>
+    <text class="field" x="12" y="101">UK merchant_vpa</text>
+    <text class="field" x="12" y="124">FK city_id, is_verified</text>
+    <text class="field" x="12" y="147">onboarded_on : date</text>
+  </g>
+  <g transform="translate(30 330)">
+    <rect class="card" width="280" height="220"/><rect class="head" width="280" height="32" rx="8"/>
+    <text class="name" x="12" y="22">bank_accounts</text>
+    <text class="field" x="12" y="55">PK account_id : integer</text>
+    <text class="field" x="12" y="78">FK user_id : integer</text>
+    <text class="field" x="12" y="101">bank_name, ifsc</text>
+    <text class="field" x="12" y="124">account_last4, account_type</text>
+    <text class="field" x="12" y="147">is_primary : boolean</text>
+    <text class="field" x="12" y="170">linked_at : timestamptz</text>
+  </g>
+  <g transform="translate(370 350)">
+    <rect class="card" width="260" height="175"/><rect class="head" width="260" height="32" rx="8"/>
+    <text class="name" x="12" y="22">vpas</text>
+    <text class="field" x="12" y="55">PK vpa : text</text>
+    <text class="field" x="12" y="78">FK user_id, account_id</text>
+    <text class="field" x="12" y="101">is_active : boolean</text>
+    <text class="field" x="12" y="124">created_at : timestamptz</text>
+  </g>
+  <g transform="translate(1040 330)">
+    <rect class="card" width="390" height="300"/><rect class="head" width="390" height="32" rx="8"/>
+    <text class="name" x="12" y="22">transactions</text>
+    <text class="field" x="12" y="55">PK txn_id : integer; UK upi_ref</text>
+    <text class="field" x="12" y="78">txn_type, FK payer_vpa</text>
+    <text class="field" x="12" y="101">payee_vpa, FK merchant_id (P2M)</text>
+    <text class="field" x="12" y="124">amount : numeric(12,2), note</text>
+    <text class="field" x="12" y="147">initiated_at, completed_at</text>
+    <text class="field" x="12" y="170">status, failure_code</text>
+    <text class="note" x="12" y="210">P2P payees may be external VPAs.</text>
+    <text class="note" x="12" y="232">P2M composite FK checks the merchant</text>
+    <text class="note" x="12" y="252">and its payee VPA together.</text>
+  </g>
+  <g transform="translate(30 690)">
+    <rect class="card" width="280" height="205"/><rect class="head" width="280" height="32" rx="8"/>
+    <text class="name" x="12" y="22">bill_payments</text>
+    <text class="field" x="12" y="55">PK bill_id : integer</text>
+    <text class="field" x="12" y="78">FK user_id : integer</text>
+    <text class="field" x="12" y="101">biller_category, biller_name</text>
+    <text class="field" x="12" y="124">consumer_number, amount</text>
+    <text class="field" x="12" y="147">due_date : date, status</text>
+    <text class="field" x="12" y="170">paid_at : timestamptz</text>
+  </g>
+  <g transform="translate(370 690)">
+    <rect class="card" width="310" height="220"/><rect class="head" width="310" height="32" rx="8"/>
+    <text class="name" x="12" y="22">rewards</text>
+    <text class="field" x="12" y="55">PK reward_id : integer</text>
+    <text class="field" x="12" y="78">FK user_id, txn_id</text>
+    <text class="field" x="12" y="101">reward_type, amount, status</text>
+    <text class="field" x="12" y="124">issued_at, expires_at</text>
+    <text class="field" x="12" y="147">credited_at : timestamptz</text>
+  </g>
+  <g transform="translate(745 735)">
+    <rect class="card" width="300" height="190"/><rect class="head" width="300" height="32" rx="8"/>
+    <text class="name" x="12" y="22">disputes</text>
+    <text class="field" x="12" y="55">PK dispute_id : integer</text>
+    <text class="field" x="12" y="78">FK txn_id, raised_by</text>
+    <text class="field" x="12" y="101">reason, status</text>
+    <text class="field" x="12" y="124">raised_at, resolved_at</text>
+  </g>
+</svg>

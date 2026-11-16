@@ -1,0 +1,100 @@
+erDiagram
+    CITIES ||--o{ USERS : "located in"
+    CITIES ||--o{ MERCHANTS : "located in"
+    USERS ||--o{ BANK_ACCOUNTS : owns
+    USERS ||--o{ VPAS : owns
+    BANK_ACCOUNTS ||--o{ VPAS : linked_to
+    VPAS ||--o{ TRANSACTIONS : payer
+    MERCHANTS ||--o{ TRANSACTIONS : receives_P2M
+    USERS ||--o{ REWARDS : associated_user
+    TRANSACTIONS ||--o{ REWARDS : associated_transaction
+    USERS ||--o{ BILL_PAYMENTS : pays
+    USERS ||--o{ DISPUTES : raises
+    TRANSACTIONS ||--o{ DISPUTES : disputed_transaction
+
+    CITIES {
+        int city_id PK
+        text city_name
+        text state
+    }
+    USERS {
+        int user_id PK
+        text full_name
+        varchar phone UK
+        text email UK
+        int city_id FK
+        text kyc_status
+        boolean is_blocked
+        timestamptz created_at
+    }
+    BANK_ACCOUNTS {
+        int account_id PK
+        int user_id FK
+        text bank_name
+        varchar ifsc
+        varchar account_last4
+        text account_type
+        boolean is_primary
+        timestamptz linked_at
+    }
+    VPAS {
+        text vpa PK
+        int user_id FK
+        int account_id FK
+        boolean is_active
+        timestamptz created_at
+    }
+    MERCHANTS {
+        int merchant_id PK
+        text merchant_name
+        smallint mcc
+        text merchant_vpa UK
+        int city_id FK
+        boolean is_verified
+        date onboarded_on
+    }
+    TRANSACTIONS {
+        int txn_id PK
+        varchar upi_ref UK
+        text txn_type
+        text payer_vpa FK
+        text payee_vpa
+        int merchant_id FK
+        numeric amount
+        text note
+        timestamptz initiated_at
+        timestamptz completed_at
+        text status
+        text failure_code
+    }
+    REWARDS {
+        int reward_id PK
+        int user_id FK
+        int txn_id FK
+        text reward_type
+        numeric amount
+        text status
+        timestamptz issued_at
+        timestamptz expires_at
+        timestamptz credited_at
+    }
+    BILL_PAYMENTS {
+        int bill_id PK
+        int user_id FK
+        text biller_category
+        text biller_name
+        text consumer_number
+        numeric amount
+        date due_date
+        text status
+        timestamptz paid_at
+    }
+    DISPUTES {
+        int dispute_id PK
+        int txn_id FK
+        int raised_by FK
+        text reason
+        timestamptz raised_at
+        text status
+        timestamptz resolved_at
+    }

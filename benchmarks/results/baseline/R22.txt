@@ -1,0 +1,63 @@
+=== R22 run 1 ===
+Sort  (cost=2172.66..2172.67 rows=1 width=45) (actual time=3.302..3.303 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=659
+  ->  Hash Right Join  (cost=996.31..2172.65 rows=1 width=45) (actual time=0.693..3.293 rows=2.00 loops=1)
+        Hash Cond: (v.account_id = ba.account_id)
+        Buffers: shared hit=654
+        ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=29) (actual time=0.002..1.331 rows=53333.00 loops=1)
+              Buffers: shared hit=503
+        ->  Hash  (cost=996.30..996.30 rows=1 width=24) (actual time=0.544..0.544 rows=2.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=151
+              ->  Index Scan using bank_accounts_user_account_unique on bank_accounts ba  (cost=0.29..996.30 rows=1 width=24) (actual time=0.208..0.541 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Index Searches: 1
+                    Buffers: shared hit=151
+Planning:
+  Buffers: shared hit=241
+Planning Time: 0.371 ms
+Execution Time: 3.334 ms
+=== R22 run 2 ===
+Sort  (cost=2172.66..2172.67 rows=1 width=45) (actual time=3.374..3.374 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=659
+  ->  Hash Right Join  (cost=996.31..2172.65 rows=1 width=45) (actual time=0.718..3.363 rows=2.00 loops=1)
+        Hash Cond: (v.account_id = ba.account_id)
+        Buffers: shared hit=654
+        ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=29) (actual time=0.002..1.370 rows=53333.00 loops=1)
+              Buffers: shared hit=503
+        ->  Hash  (cost=996.30..996.30 rows=1 width=24) (actual time=0.571..0.572 rows=2.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=151
+              ->  Index Scan using bank_accounts_user_account_unique on bank_accounts ba  (cost=0.29..996.30 rows=1 width=24) (actual time=0.215..0.568 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Index Searches: 1
+                    Buffers: shared hit=151
+Planning:
+  Buffers: shared hit=241
+Planning Time: 0.324 ms
+Execution Time: 3.398 ms
+=== R22 run 3 ===
+Sort  (cost=2172.66..2172.67 rows=1 width=45) (actual time=3.351..3.352 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=659
+  ->  Hash Right Join  (cost=996.31..2172.65 rows=1 width=45) (actual time=0.707..3.342 rows=2.00 loops=1)
+        Hash Cond: (v.account_id = ba.account_id)
+        Buffers: shared hit=654
+        ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=29) (actual time=0.002..1.361 rows=53333.00 loops=1)
+              Buffers: shared hit=503
+        ->  Hash  (cost=996.30..996.30 rows=1 width=24) (actual time=0.549..0.549 rows=2.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=151
+              ->  Index Scan using bank_accounts_user_account_unique on bank_accounts ba  (cost=0.29..996.30 rows=1 width=24) (actual time=0.211..0.546 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Index Searches: 1
+                    Buffers: shared hit=151
+Planning:
+  Buffers: shared hit=241
+Planning Time: 0.333 ms
+Execution Time: 3.376 ms

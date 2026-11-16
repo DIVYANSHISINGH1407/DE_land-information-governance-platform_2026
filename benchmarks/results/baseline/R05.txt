@@ -1,0 +1,60 @@
+=== R05 run 1 ===
+GroupAggregate  (cost=7521.35..7521.37 rows=1 width=72) (actual time=6.794..7.486 rows=3.00 loops=1)
+  Group Key: (EXTRACT(hour FROM initiated_at))
+  Buffers: shared hit=4437
+  ->  Sort  (cost=7521.35..7521.35 rows=1 width=38) (actual time=6.788..7.479 rows=3.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM initiated_at))
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=4437
+        ->  Gather  (cost=1000.00..7521.34 rows=1 width=38) (actual time=6.711..7.465 rows=3.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=4434
+              ->  Parallel Seq Scan on transactions  (cost=0.00..6521.24 rows=1 width=38) (actual time=5.048..5.076 rows=1.00 loops=3)
+                    Filter: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (merchant_id = 2) AND (status = 'SUCCESS'::text))
+                    Rows Removed by Filter: 83488
+                    Buffers: shared hit=4434
+Planning:
+  Buffers: shared hit=167
+Planning Time: 0.232 ms
+Execution Time: 7.517 ms
+=== R05 run 2 ===
+GroupAggregate  (cost=7521.35..7521.37 rows=1 width=72) (actual time=6.050..6.754 rows=3.00 loops=1)
+  Group Key: (EXTRACT(hour FROM initiated_at))
+  Buffers: shared hit=4437
+  ->  Sort  (cost=7521.35..7521.35 rows=1 width=38) (actual time=6.042..6.745 rows=3.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM initiated_at))
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=4437
+        ->  Gather  (cost=1000.00..7521.34 rows=1 width=38) (actual time=5.960..6.729 rows=3.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=4434
+              ->  Parallel Seq Scan on transactions  (cost=0.00..6521.24 rows=1 width=38) (actual time=4.744..4.767 rows=1.00 loops=3)
+                    Filter: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (merchant_id = 2) AND (status = 'SUCCESS'::text))
+                    Rows Removed by Filter: 83488
+                    Buffers: shared hit=4434
+Planning:
+  Buffers: shared hit=167
+Planning Time: 0.216 ms
+Execution Time: 6.823 ms
+=== R05 run 3 ===
+GroupAggregate  (cost=7521.35..7521.37 rows=1 width=72) (actual time=6.050..6.771 rows=3.00 loops=1)
+  Group Key: (EXTRACT(hour FROM initiated_at))
+  Buffers: shared hit=4437
+  ->  Sort  (cost=7521.35..7521.35 rows=1 width=38) (actual time=6.043..6.764 rows=3.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM initiated_at))
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=4437
+        ->  Gather  (cost=1000.00..7521.34 rows=1 width=38) (actual time=5.968..6.751 rows=3.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=4434
+              ->  Parallel Seq Scan on transactions  (cost=0.00..6521.24 rows=1 width=38) (actual time=4.783..4.806 rows=1.00 loops=3)
+                    Filter: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (merchant_id = 2) AND (status = 'SUCCESS'::text))
+                    Rows Removed by Filter: 83488
+                    Buffers: shared hit=4434
+Planning:
+  Buffers: shared hit=167
+Planning Time: 0.207 ms
+Execution Time: 6.804 ms
