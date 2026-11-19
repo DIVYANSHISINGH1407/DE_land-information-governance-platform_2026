@@ -1,0 +1,120 @@
+=== R19 run 1 ===
+Sort  (cost=7139.06..7139.66 rows=243 width=39) (actual time=12.098..12.104 rows=239.00 loops=1)
+  Sort Key: (COALESCE((count(*) FILTER (WHERE (transactions.status = 'SUCCESS'::text))), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 38kB
+  Buffers: shared hit=1051
+  ->  Merge Left Join  (cost=0.70..7129.43 rows=243 width=39) (actual time=0.203..12.052 rows=239.00 loops=1)
+        Merge Cond: (m.merchant_id = transactions.merchant_id)
+        Buffers: shared hit=1048
+        ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..133.78 rows=243 width=23) (actual time=0.005..0.237 rows=239.00 loops=1)
+              Filter: (is_verified AND (city_id = 1))
+              Rows Removed by Filter: 2761
+              Index Searches: 1
+              Buffers: shared hit=44
+        ->  GroupAggregate  (cost=0.42..6961.09 rows=2550 width=20) (actual time=0.137..11.697 rows=2550.00 loops=1)
+              Group Key: transactions.merchant_id
+              Buffers: shared hit=1004
+              ->  Index Only Scan using idx_transactions_merchant_time on transactions  (cost=0.42..5532.72 rows=140287 width=19) (actual time=0.033..6.445 rows=139887.00 loops=1)
+                    Heap Fetches: 184
+                    Index Searches: 1
+                    Buffers: shared hit=1004
+Planning:
+  Buffers: shared hit=526
+Planning Time: 0.826 ms
+Execution Time: 12.139 ms
+=== R19 run 2 ===
+Sort  (cost=7139.06..7139.66 rows=243 width=39) (actual time=14.822..14.833 rows=239.00 loops=1)
+  Sort Key: (COALESCE((count(*) FILTER (WHERE (transactions.status = 'SUCCESS'::text))), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 38kB
+  Buffers: shared hit=1051
+  ->  Merge Left Join  (cost=0.70..7129.43 rows=243 width=39) (actual time=0.222..14.761 rows=239.00 loops=1)
+        Merge Cond: (m.merchant_id = transactions.merchant_id)
+        Buffers: shared hit=1048
+        ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..133.78 rows=243 width=23) (actual time=0.006..0.356 rows=239.00 loops=1)
+              Filter: (is_verified AND (city_id = 1))
+              Rows Removed by Filter: 2761
+              Index Searches: 1
+              Buffers: shared hit=44
+        ->  GroupAggregate  (cost=0.42..6961.09 rows=2550 width=20) (actual time=0.159..14.258 rows=2550.00 loops=1)
+              Group Key: transactions.merchant_id
+              Buffers: shared hit=1004
+              ->  Index Only Scan using idx_transactions_merchant_time on transactions  (cost=0.42..5532.72 rows=140287 width=19) (actual time=0.033..7.360 rows=139887.00 loops=1)
+                    Heap Fetches: 184
+                    Index Searches: 1
+                    Buffers: shared hit=1004
+Planning:
+  Buffers: shared hit=526
+Planning Time: 0.788 ms
+Execution Time: 14.881 ms
+=== R19 run 3 ===
+Sort  (cost=7139.06..7139.66 rows=243 width=39) (actual time=10.784..10.789 rows=239.00 loops=1)
+  Sort Key: (COALESCE((count(*) FILTER (WHERE (transactions.status = 'SUCCESS'::text))), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 38kB
+  Buffers: shared hit=1051
+  ->  Merge Left Join  (cost=0.70..7129.43 rows=243 width=39) (actual time=0.176..10.756 rows=239.00 loops=1)
+        Merge Cond: (m.merchant_id = transactions.merchant_id)
+        Buffers: shared hit=1048
+        ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..133.78 rows=243 width=23) (actual time=0.007..0.190 rows=239.00 loops=1)
+              Filter: (is_verified AND (city_id = 1))
+              Rows Removed by Filter: 2761
+              Index Searches: 1
+              Buffers: shared hit=44
+        ->  GroupAggregate  (cost=0.42..6961.09 rows=2550 width=20) (actual time=0.120..10.484 rows=2550.00 loops=1)
+              Group Key: transactions.merchant_id
+              Buffers: shared hit=1004
+              ->  Index Only Scan using idx_transactions_merchant_time on transactions  (cost=0.42..5532.72 rows=140287 width=19) (actual time=0.027..5.474 rows=139887.00 loops=1)
+                    Heap Fetches: 184
+                    Index Searches: 1
+                    Buffers: shared hit=1004
+Planning:
+  Buffers: shared hit=526
+Planning Time: 0.734 ms
+Execution Time: 10.822 ms
+=== R19 run 4 ===
+Sort  (cost=7139.06..7139.66 rows=243 width=39) (actual time=10.542..10.547 rows=239.00 loops=1)
+  Sort Key: (COALESCE((count(*) FILTER (WHERE (transactions.status = 'SUCCESS'::text))), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 38kB
+  Buffers: shared hit=1051
+  ->  Merge Left Join  (cost=0.70..7129.43 rows=243 width=39) (actual time=0.176..10.505 rows=239.00 loops=1)
+        Merge Cond: (m.merchant_id = transactions.merchant_id)
+        Buffers: shared hit=1048
+        ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..133.78 rows=243 width=23) (actual time=0.005..0.197 rows=239.00 loops=1)
+              Filter: (is_verified AND (city_id = 1))
+              Rows Removed by Filter: 2761
+              Index Searches: 1
+              Buffers: shared hit=44
+        ->  GroupAggregate  (cost=0.42..6961.09 rows=2550 width=20) (actual time=0.121..10.227 rows=2550.00 loops=1)
+              Group Key: transactions.merchant_id
+              Buffers: shared hit=1004
+              ->  Index Only Scan using idx_transactions_merchant_time on transactions  (cost=0.42..5532.72 rows=140287 width=19) (actual time=0.025..5.485 rows=139887.00 loops=1)
+                    Heap Fetches: 184
+                    Index Searches: 1
+                    Buffers: shared hit=1004
+Planning:
+  Buffers: shared hit=526
+Planning Time: 0.699 ms
+Execution Time: 10.579 ms
+=== R19 run 5 ===
+Sort  (cost=7139.06..7139.66 rows=243 width=39) (actual time=10.465..10.472 rows=239.00 loops=1)
+  Sort Key: (COALESCE((count(*) FILTER (WHERE (transactions.status = 'SUCCESS'::text))), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 38kB
+  Buffers: shared hit=1051
+  ->  Merge Left Join  (cost=0.70..7129.43 rows=243 width=39) (actual time=0.202..10.433 rows=239.00 loops=1)
+        Merge Cond: (m.merchant_id = transactions.merchant_id)
+        Buffers: shared hit=1048
+        ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..133.78 rows=243 width=23) (actual time=0.005..0.192 rows=239.00 loops=1)
+              Filter: (is_verified AND (city_id = 1))
+              Rows Removed by Filter: 2761
+              Index Searches: 1
+              Buffers: shared hit=44
+        ->  GroupAggregate  (cost=0.42..6961.09 rows=2550 width=20) (actual time=0.135..10.157 rows=2550.00 loops=1)
+              Group Key: transactions.merchant_id
+              Buffers: shared hit=1004
+              ->  Index Only Scan using idx_transactions_merchant_time on transactions  (cost=0.42..5532.72 rows=140287 width=19) (actual time=0.025..5.510 rows=139887.00 loops=1)
+                    Heap Fetches: 184
+                    Index Searches: 1
+                    Buffers: shared hit=1004
+Planning:
+  Buffers: shared hit=526
+Planning Time: 0.735 ms
+Execution Time: 10.507 ms

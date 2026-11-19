@@ -1,0 +1,170 @@
+=== R25 run 1 ===
+Sort  (cost=4204.61..4204.63 rows=8 width=54) (actual time=13.212..13.213 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1196
+  ->  HashAggregate  (cost=4204.37..4204.49 rows=8 width=54) (actual time=13.202..13.204 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=1193
+        ->  Hash Join  (cost=2581.06..4032.16 rows=13777 width=30) (actual time=7.421..11.635 rows=13639.00 loops=1)
+              Hash Cond: (ba.account_id = v.account_id)
+              Buffers: shared hit=1193
+              ->  Seq Scan on bank_accounts ba  (cost=0.00..1113.33 rows=53333 width=18) (actual time=0.002..1.449 rows=53333.00 loops=1)
+                    Buffers: shared hit=580
+              ->  Hash  (cost=2408.85..2408.85 rows=13777 width=20) (actual time=7.407..7.408 rows=13639.00 loops=1)
+                    Buckets: 16384  Batches: 1  Memory Usage: 821kB
+                    Buffers: shared hit=613
+                    ->  Hash Join  (cost=1703.41..2408.85 rows=13777 width=20) (actual time=4.801..6.838 rows=13639.00 loops=1)
+                          Hash Cond: (t.payer_vpa = v.vpa)
+                          Buffers: shared hit=613
+                          ->  Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.42..669.69 rows=13777 width=40) (actual time=0.006..0.573 rows=13639.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                Heap Fetches: 61
+                                Index Searches: 1
+                                Buffers: shared hit=110
+                          ->  Hash  (cost=1036.33..1036.33 rows=53333 width=28) (actual time=4.763..4.764 rows=53333.00 loops=1)
+                                Buckets: 65536  Batches: 1  Memory Usage: 3763kB
+                                Buffers: shared hit=503
+                                ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=28) (actual time=0.002..1.961 rows=53333.00 loops=1)
+                                      Buffers: shared hit=503
+Planning:
+  Buffers: shared hit=711
+Planning Time: 0.884 ms
+Execution Time: 13.279 ms
+=== R25 run 2 ===
+Sort  (cost=4204.61..4204.63 rows=8 width=54) (actual time=13.811..13.812 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1195
+  ->  HashAggregate  (cost=4204.37..4204.49 rows=8 width=54) (actual time=13.801..13.803 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=1192
+        ->  Hash Join  (cost=2581.06..4032.16 rows=13777 width=30) (actual time=7.825..12.242 rows=13639.00 loops=1)
+              Hash Cond: (ba.account_id = v.account_id)
+              Buffers: shared hit=1192
+              ->  Seq Scan on bank_accounts ba  (cost=0.00..1113.33 rows=53333 width=18) (actual time=0.002..1.450 rows=53333.00 loops=1)
+                    Buffers: shared hit=580
+              ->  Hash  (cost=2408.85..2408.85 rows=13777 width=20) (actual time=7.811..7.812 rows=13639.00 loops=1)
+                    Buckets: 16384  Batches: 1  Memory Usage: 821kB
+                    Buffers: shared hit=612
+                    ->  Hash Join  (cost=1703.41..2408.85 rows=13777 width=20) (actual time=5.047..7.195 rows=13639.00 loops=1)
+                          Hash Cond: (t.payer_vpa = v.vpa)
+                          Buffers: shared hit=612
+                          ->  Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.42..669.69 rows=13777 width=40) (actual time=0.007..0.552 rows=13639.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                Heap Fetches: 56
+                                Index Searches: 1
+                                Buffers: shared hit=109
+                          ->  Hash  (cost=1036.33..1036.33 rows=53333 width=28) (actual time=5.008..5.008 rows=53333.00 loops=1)
+                                Buckets: 65536  Batches: 1  Memory Usage: 3763kB
+                                Buffers: shared hit=503
+                                ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=28) (actual time=0.003..1.998 rows=53333.00 loops=1)
+                                      Buffers: shared hit=503
+Planning:
+  Buffers: shared hit=711
+Planning Time: 1.016 ms
+Execution Time: 13.871 ms
+=== R25 run 3 ===
+Sort  (cost=4204.61..4204.63 rows=8 width=54) (actual time=12.906..12.910 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1195
+  ->  HashAggregate  (cost=4204.37..4204.49 rows=8 width=54) (actual time=12.896..12.901 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=1192
+        ->  Hash Join  (cost=2581.06..4032.16 rows=13777 width=30) (actual time=7.234..11.382 rows=13639.00 loops=1)
+              Hash Cond: (ba.account_id = v.account_id)
+              Buffers: shared hit=1192
+              ->  Seq Scan on bank_accounts ba  (cost=0.00..1113.33 rows=53333 width=18) (actual time=0.002..1.412 rows=53333.00 loops=1)
+                    Buffers: shared hit=580
+              ->  Hash  (cost=2408.85..2408.85 rows=13777 width=20) (actual time=7.220..7.222 rows=13639.00 loops=1)
+                    Buckets: 16384  Batches: 1  Memory Usage: 821kB
+                    Buffers: shared hit=612
+                    ->  Hash Join  (cost=1703.41..2408.85 rows=13777 width=20) (actual time=4.685..6.655 rows=13639.00 loops=1)
+                          Hash Cond: (t.payer_vpa = v.vpa)
+                          Buffers: shared hit=612
+                          ->  Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.42..669.69 rows=13777 width=40) (actual time=0.007..0.544 rows=13639.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                Heap Fetches: 56
+                                Index Searches: 1
+                                Buffers: shared hit=109
+                          ->  Hash  (cost=1036.33..1036.33 rows=53333 width=28) (actual time=4.649..4.650 rows=53333.00 loops=1)
+                                Buckets: 65536  Batches: 1  Memory Usage: 3763kB
+                                Buffers: shared hit=503
+                                ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=28) (actual time=0.002..1.929 rows=53333.00 loops=1)
+                                      Buffers: shared hit=503
+Planning:
+  Buffers: shared hit=711
+Planning Time: 0.907 ms
+Execution Time: 12.954 ms
+=== R25 run 4 ===
+Sort  (cost=4204.61..4204.63 rows=8 width=54) (actual time=13.338..13.339 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1195
+  ->  HashAggregate  (cost=4204.37..4204.49 rows=8 width=54) (actual time=13.327..13.329 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=1192
+        ->  Hash Join  (cost=2581.06..4032.16 rows=13777 width=30) (actual time=7.430..11.787 rows=13639.00 loops=1)
+              Hash Cond: (ba.account_id = v.account_id)
+              Buffers: shared hit=1192
+              ->  Seq Scan on bank_accounts ba  (cost=0.00..1113.33 rows=53333 width=18) (actual time=0.002..1.444 rows=53333.00 loops=1)
+                    Buffers: shared hit=580
+              ->  Hash  (cost=2408.85..2408.85 rows=13777 width=20) (actual time=7.416..7.417 rows=13639.00 loops=1)
+                    Buckets: 16384  Batches: 1  Memory Usage: 821kB
+                    Buffers: shared hit=612
+                    ->  Hash Join  (cost=1703.41..2408.85 rows=13777 width=20) (actual time=4.779..6.821 rows=13639.00 loops=1)
+                          Hash Cond: (t.payer_vpa = v.vpa)
+                          Buffers: shared hit=612
+                          ->  Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.42..669.69 rows=13777 width=40) (actual time=0.007..0.556 rows=13639.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                Heap Fetches: 56
+                                Index Searches: 1
+                                Buffers: shared hit=109
+                          ->  Hash  (cost=1036.33..1036.33 rows=53333 width=28) (actual time=4.743..4.744 rows=53333.00 loops=1)
+                                Buckets: 65536  Batches: 1  Memory Usage: 3763kB
+                                Buffers: shared hit=503
+                                ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=28) (actual time=0.003..1.933 rows=53333.00 loops=1)
+                                      Buffers: shared hit=503
+Planning:
+  Buffers: shared hit=711
+Planning Time: 0.897 ms
+Execution Time: 13.416 ms
+=== R25 run 5 ===
+Sort  (cost=4204.61..4204.63 rows=8 width=54) (actual time=14.135..14.136 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1195
+  ->  HashAggregate  (cost=4204.37..4204.49 rows=8 width=54) (actual time=14.125..14.127 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=1192
+        ->  Hash Join  (cost=2581.06..4032.16 rows=13777 width=30) (actual time=8.165..12.553 rows=13639.00 loops=1)
+              Hash Cond: (ba.account_id = v.account_id)
+              Buffers: shared hit=1192
+              ->  Seq Scan on bank_accounts ba  (cost=0.00..1113.33 rows=53333 width=18) (actual time=0.002..1.464 rows=53333.00 loops=1)
+                    Buffers: shared hit=580
+              ->  Hash  (cost=2408.85..2408.85 rows=13777 width=20) (actual time=8.150..8.151 rows=13639.00 loops=1)
+                    Buckets: 16384  Batches: 1  Memory Usage: 821kB
+                    Buffers: shared hit=612
+                    ->  Hash Join  (cost=1703.41..2408.85 rows=13777 width=20) (actual time=5.044..7.524 rows=13639.00 loops=1)
+                          Hash Cond: (t.payer_vpa = v.vpa)
+                          Buffers: shared hit=612
+                          ->  Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.42..669.69 rows=13777 width=40) (actual time=0.007..0.572 rows=13639.00 loops=1)
+                                Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                Heap Fetches: 56
+                                Index Searches: 1
+                                Buffers: shared hit=109
+                          ->  Hash  (cost=1036.33..1036.33 rows=53333 width=28) (actual time=5.007..5.007 rows=53333.00 loops=1)
+                                Buckets: 65536  Batches: 1  Memory Usage: 3763kB
+                                Buffers: shared hit=503
+                                ->  Seq Scan on vpas v  (cost=0.00..1036.33 rows=53333 width=28) (actual time=0.003..2.000 rows=53333.00 loops=1)
+                                      Buffers: shared hit=503
+Planning:
+  Buffers: shared hit=711
+Planning Time: 0.921 ms
+Execution Time: 14.193 ms

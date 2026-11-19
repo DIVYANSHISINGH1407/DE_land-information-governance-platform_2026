@@ -1,0 +1,95 @@
+=== R03 run 1 ===
+Aggregate  (cost=12.89..12.90 rows=1 width=32) (actual time=0.019..0.020 rows=1.00 loops=1)
+  Buffers: shared hit=10
+  ->  Nested Loop  (cost=0.83..12.88 rows=1 width=6) (actual time=0.016..0.017 rows=0.00 loops=1)
+        Buffers: shared hit=10
+        ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.41..4.43 rows=1 width=24) (actual time=0.006..0.006 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Only Scan using idx_transactions_payer_time_active on transactions t  (cost=0.42..8.44 rows=1 width=30) (actual time=0.005..0.005 rows=0.00 loops=2)
+              Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=640 read=3
+Planning Time: 1.028 ms
+Execution Time: 0.043 ms
+=== R03 run 2 ===
+Aggregate  (cost=12.89..12.90 rows=1 width=32) (actual time=0.015..0.015 rows=1.00 loops=1)
+  Buffers: shared hit=10
+  ->  Nested Loop  (cost=0.83..12.88 rows=1 width=6) (actual time=0.012..0.012 rows=0.00 loops=1)
+        Buffers: shared hit=10
+        ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.41..4.43 rows=1 width=24) (actual time=0.005..0.005 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Only Scan using idx_transactions_payer_time_active on transactions t  (cost=0.42..8.44 rows=1 width=30) (actual time=0.003..0.003 rows=0.00 loops=2)
+              Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=643
+Planning Time: 0.967 ms
+Execution Time: 0.038 ms
+=== R03 run 3 ===
+Aggregate  (cost=12.89..12.90 rows=1 width=32) (actual time=0.016..0.016 rows=1.00 loops=1)
+  Buffers: shared hit=10
+  ->  Nested Loop  (cost=0.83..12.88 rows=1 width=6) (actual time=0.013..0.013 rows=0.00 loops=1)
+        Buffers: shared hit=10
+        ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.41..4.43 rows=1 width=24) (actual time=0.005..0.005 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Only Scan using idx_transactions_payer_time_active on transactions t  (cost=0.42..8.44 rows=1 width=30) (actual time=0.004..0.004 rows=0.00 loops=2)
+              Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=643
+Planning Time: 1.029 ms
+Execution Time: 0.040 ms
+=== R03 run 4 ===
+Aggregate  (cost=12.89..12.90 rows=1 width=32) (actual time=0.013..0.013 rows=1.00 loops=1)
+  Buffers: shared hit=10
+  ->  Nested Loop  (cost=0.83..12.88 rows=1 width=6) (actual time=0.011..0.011 rows=0.00 loops=1)
+        Buffers: shared hit=10
+        ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.41..4.43 rows=1 width=24) (actual time=0.004..0.004 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Only Scan using idx_transactions_payer_time_active on transactions t  (cost=0.42..8.44 rows=1 width=30) (actual time=0.003..0.003 rows=0.00 loops=2)
+              Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=643
+Planning Time: 0.953 ms
+Execution Time: 0.035 ms
+=== R03 run 5 ===
+Aggregate  (cost=12.89..12.90 rows=1 width=32) (actual time=0.012..0.013 rows=1.00 loops=1)
+  Buffers: shared hit=10
+  ->  Nested Loop  (cost=0.83..12.88 rows=1 width=6) (actual time=0.010..0.010 rows=0.00 loops=1)
+        Buffers: shared hit=10
+        ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.41..4.43 rows=1 width=24) (actual time=0.004..0.004 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Only Scan using idx_transactions_payer_time_active on transactions t  (cost=0.42..8.44 rows=1 width=30) (actual time=0.003..0.003 rows=0.00 loops=2)
+              Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=643
+Planning Time: 0.906 ms
+Execution Time: 0.033 ms

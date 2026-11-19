@@ -1,0 +1,50 @@
+=== R12 run 1 ===
+Index Only Scan using idx_bills_due_user_date on bill_payments  (cost=0.28..8.30 rows=1 width=24) (actual time=0.035..0.036 rows=1.00 loops=1)
+  Index Cond: ((user_id = 1072) AND (due_date >= '2026-07-01'::date) AND (due_date <= '2026-07-07'::date))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=154
+Planning Time: 0.257 ms
+Execution Time: 0.052 ms
+=== R12 run 2 ===
+Index Only Scan using idx_bills_due_user_date on bill_payments  (cost=0.28..8.30 rows=1 width=24) (actual time=0.028..0.029 rows=1.00 loops=1)
+  Index Cond: ((user_id = 1072) AND (due_date >= '2026-07-01'::date) AND (due_date <= '2026-07-07'::date))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=154
+Planning Time: 0.234 ms
+Execution Time: 0.043 ms
+=== R12 run 3 ===
+Index Only Scan using idx_bills_due_user_date on bill_payments  (cost=0.28..8.30 rows=1 width=24) (actual time=0.026..0.026 rows=1.00 loops=1)
+  Index Cond: ((user_id = 1072) AND (due_date >= '2026-07-01'::date) AND (due_date <= '2026-07-07'::date))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=154
+Planning Time: 0.229 ms
+Execution Time: 0.042 ms
+=== R12 run 4 ===
+Index Only Scan using idx_bills_due_user_date on bill_payments  (cost=0.28..8.30 rows=1 width=24) (actual time=0.025..0.025 rows=1.00 loops=1)
+  Index Cond: ((user_id = 1072) AND (due_date >= '2026-07-01'::date) AND (due_date <= '2026-07-07'::date))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=154
+Planning Time: 0.217 ms
+Execution Time: 0.040 ms
+=== R12 run 5 ===
+Index Only Scan using idx_bills_due_user_date on bill_payments  (cost=0.28..8.30 rows=1 width=24) (actual time=0.024..0.024 rows=1.00 loops=1)
+  Index Cond: ((user_id = 1072) AND (due_date >= '2026-07-01'::date) AND (due_date <= '2026-07-07'::date))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=154
+Planning Time: 0.207 ms
+Execution Time: 0.038 ms

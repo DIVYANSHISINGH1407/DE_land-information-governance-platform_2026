@@ -1,0 +1,50 @@
+=== R11 run 1 ===
+Index Only Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..28.66 rows=479 width=16) (actual time=0.024..0.031 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Heap Fetches: 51
+  Index Searches: 1
+  Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=161
+Planning Time: 0.248 ms
+Execution Time: 0.048 ms
+=== R11 run 2 ===
+Index Only Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..28.66 rows=479 width=16) (actual time=0.023..0.029 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Heap Fetches: 51
+  Index Searches: 1
+  Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=161
+Planning Time: 0.277 ms
+Execution Time: 0.049 ms
+=== R11 run 3 ===
+Index Only Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..28.66 rows=479 width=16) (actual time=0.026..0.032 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Heap Fetches: 51
+  Index Searches: 1
+  Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=161
+Planning Time: 0.284 ms
+Execution Time: 0.050 ms
+=== R11 run 4 ===
+Index Only Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..28.66 rows=479 width=16) (actual time=0.024..0.030 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Heap Fetches: 51
+  Index Searches: 1
+  Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=161
+Planning Time: 0.259 ms
+Execution Time: 0.047 ms
+=== R11 run 5 ===
+Index Only Scan using idx_rewards_unscratched_expiry on rewards  (cost=0.27..28.66 rows=479 width=16) (actual time=0.033..0.055 rows=51.00 loops=1)
+  Index Cond: (expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone)
+  Heap Fetches: 51
+  Index Searches: 1
+  Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=161
+Planning Time: 0.304 ms
+Execution Time: 0.074 ms

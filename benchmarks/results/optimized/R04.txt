@@ -1,0 +1,70 @@
+=== R04 run 1 ===
+Sort  (cost=14.55..14.68 rows=50 width=55) (actual time=0.045..0.048 rows=120.00 loops=1)
+  Sort Key: initiated_at
+  Sort Method: quicksort  Memory: 33kB
+  Buffers: shared hit=14
+  ->  Index Scan using idx_transactions_pending_txn_id on transactions  (cost=0.14..13.14 rows=50 width=55) (actual time=0.007..0.029 rows=120.00 loops=1)
+        Filter: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+        Rows Removed by Filter: 5
+        Index Searches: 1
+        Buffers: shared hit=11
+Planning:
+  Buffers: shared hit=503
+Planning Time: 0.703 ms
+Execution Time: 0.062 ms
+=== R04 run 2 ===
+Sort  (cost=14.55..14.68 rows=50 width=55) (actual time=0.036..0.038 rows=120.00 loops=1)
+  Sort Key: initiated_at
+  Sort Method: quicksort  Memory: 33kB
+  Buffers: shared hit=8
+  ->  Index Scan using idx_transactions_pending_txn_id on transactions  (cost=0.14..13.14 rows=50 width=55) (actual time=0.007..0.020 rows=120.00 loops=1)
+        Filter: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+        Rows Removed by Filter: 5
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=503
+Planning Time: 0.692 ms
+Execution Time: 0.052 ms
+=== R04 run 3 ===
+Sort  (cost=14.55..14.68 rows=50 width=55) (actual time=0.034..0.036 rows=120.00 loops=1)
+  Sort Key: initiated_at
+  Sort Method: quicksort  Memory: 33kB
+  Buffers: shared hit=8
+  ->  Index Scan using idx_transactions_pending_txn_id on transactions  (cost=0.14..13.14 rows=50 width=55) (actual time=0.007..0.019 rows=120.00 loops=1)
+        Filter: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+        Rows Removed by Filter: 5
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=503
+Planning Time: 0.677 ms
+Execution Time: 0.050 ms
+=== R04 run 4 ===
+Sort  (cost=14.55..14.68 rows=50 width=55) (actual time=0.032..0.035 rows=120.00 loops=1)
+  Sort Key: initiated_at
+  Sort Method: quicksort  Memory: 33kB
+  Buffers: shared hit=8
+  ->  Index Scan using idx_transactions_pending_txn_id on transactions  (cost=0.14..13.14 rows=50 width=55) (actual time=0.006..0.018 rows=120.00 loops=1)
+        Filter: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+        Rows Removed by Filter: 5
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=503
+Planning Time: 0.643 ms
+Execution Time: 0.048 ms
+=== R04 run 5 ===
+Sort  (cost=14.55..14.68 rows=50 width=55) (actual time=0.033..0.035 rows=120.00 loops=1)
+  Sort Key: initiated_at
+  Sort Method: quicksort  Memory: 33kB
+  Buffers: shared hit=8
+  ->  Index Scan using idx_transactions_pending_txn_id on transactions  (cost=0.14..13.14 rows=50 width=55) (actual time=0.007..0.018 rows=120.00 loops=1)
+        Filter: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+        Rows Removed by Filter: 5
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=503
+Planning Time: 0.662 ms
+Execution Time: 0.049 ms

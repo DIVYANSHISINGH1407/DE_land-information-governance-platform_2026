@@ -1,0 +1,50 @@
+=== R10 run 1 ===
+Index Only Scan using idx_rewards_unscratched_user_expiry on rewards  (cost=0.27..8.29 rows=1 width=30) (actual time=0.038..0.039 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=173
+Planning Time: 0.340 ms
+Execution Time: 0.054 ms
+=== R10 run 2 ===
+Index Only Scan using idx_rewards_unscratched_user_expiry on rewards  (cost=0.27..8.29 rows=1 width=30) (actual time=0.023..0.024 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=173
+Planning Time: 0.253 ms
+Execution Time: 0.038 ms
+=== R10 run 3 ===
+Index Only Scan using idx_rewards_unscratched_user_expiry on rewards  (cost=0.27..8.29 rows=1 width=30) (actual time=0.027..0.027 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=173
+Planning Time: 0.268 ms
+Execution Time: 0.042 ms
+=== R10 run 4 ===
+Index Only Scan using idx_rewards_unscratched_user_expiry on rewards  (cost=0.27..8.29 rows=1 width=30) (actual time=0.026..0.026 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=173
+Planning Time: 0.275 ms
+Execution Time: 0.040 ms
+=== R10 run 5 ===
+Index Only Scan using idx_rewards_unscratched_user_expiry on rewards  (cost=0.27..8.29 rows=1 width=30) (actual time=0.025..0.025 rows=2.00 loops=1)
+  Index Cond: ((user_id = 15177) AND (expires_at > '2026-06-30 23:59:00+05:30'::timestamp with time zone))
+  Heap Fetches: 1
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=173
+Planning Time: 0.259 ms
+Execution Time: 0.040 ms
