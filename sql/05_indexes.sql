@@ -1,5 +1,3 @@
--- Extra indexes for the 30 queries in our workload.
--- Run this after creating and loading the tables.
 SET search_path TO gpay;
 
 -- These help us get a user's UPI IDs quickly for the history, limit,

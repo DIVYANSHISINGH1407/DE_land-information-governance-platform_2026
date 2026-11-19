@@ -1,8 +1,7 @@
 
 -- Google Pay (UPI) DBMS Project: the 30 queries you must benchmark
---   R01–R25 : read queries  (25)
---   W01–W05 : write queries (5)
-
+--   R01–R25 : read queries
+--   W01–W05 : write queries 
 
 SET search_path TO gpay;
 BEGIN;
@@ -297,5 +296,4 @@ SET status = 'OVERDUE'
 WHERE status = 'DUE'
   AND due_date < '2026-07-05';
 
--- @END
 ROLLBACK;
