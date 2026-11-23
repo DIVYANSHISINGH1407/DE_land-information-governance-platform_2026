@@ -1,0 +1,75 @@
+=== R22 run 1 ===
+Sort  (cost=33900.78..33900.79 rows=1 width=47) (actual time=121.639..122.360 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=5 read=21734
+  ->  Gather  (cost=18150.56..33900.77 rows=1 width=47) (actual time=121.629..122.350 rows=2.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared read=21734
+        ->  Parallel Hash Right Join  (cost=17150.56..32900.67 rows=1 width=47) (actual time=110.805..119.366 rows=0.67 loops=3)
+              Hash Cond: (v.account_id = ba.account_id)
+              Buffers: shared read=21734
+              ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=31) (actual time=0.061..13.549 rows=355555.33 loops=3)
+                    Buffers: shared read=10139
+              ->  Parallel Hash  (cost=17150.55..17150.55 rows=1 width=24) (actual time=92.376..92.377 rows=0.67 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 40kB
+                    Buffers: shared read=11595
+                    ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..17150.55 rows=1 width=24) (actual time=61.974..92.303 rows=0.67 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 355555
+                          Buffers: shared read=11595
+Planning:
+  Buffers: shared hit=253 read=16
+Planning Time: 1.591 ms
+Execution Time: 122.393 ms
+=== R22 run 2 ===
+Sort  (cost=33900.78..33900.79 rows=1 width=47) (actual time=36.914..37.742 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=569 read=21170
+  ->  Gather  (cost=18150.56..33900.77 rows=1 width=47) (actual time=16.258..37.725 rows=2.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=564 read=21170
+        ->  Parallel Hash Right Join  (cost=17150.56..32900.67 rows=1 width=47) (actual time=27.960..34.838 rows=0.67 loops=3)
+              Hash Cond: (v.account_id = ba.account_id)
+              Buffers: shared hit=564 read=21170
+              ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=31) (actual time=0.054..10.987 rows=355555.33 loops=3)
+                    Buffers: shared hit=282 read=9857
+              ->  Parallel Hash  (cost=17150.55..17150.55 rows=1 width=24) (actual time=12.776..12.776 rows=0.67 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 40kB
+                    Buffers: shared hit=282 read=11313
+                    ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..17150.55 rows=1 width=24) (actual time=8.156..12.719 rows=0.67 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 355555
+                          Buffers: shared hit=282 read=11313
+Planning:
+  Buffers: shared hit=269
+Planning Time: 0.404 ms
+Execution Time: 37.820 ms
+=== R22 run 3 ===
+Sort  (cost=33900.78..33900.79 rows=1 width=47) (actual time=34.812..35.752 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1133 read=20606
+  ->  Gather  (cost=18150.56..33900.77 rows=1 width=47) (actual time=34.745..35.742 rows=2.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=1128 read=20606
+        ->  Parallel Hash Right Join  (cost=17150.56..32900.67 rows=1 width=47) (actual time=26.367..32.849 rows=0.67 loops=3)
+              Hash Cond: (v.account_id = ba.account_id)
+              Buffers: shared hit=1128 read=20606
+              ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=31) (actual time=0.052..10.266 rows=355555.33 loops=3)
+                    Buffers: shared hit=564 read=9575
+              ->  Parallel Hash  (cost=17150.55..17150.55 rows=1 width=24) (actual time=12.252..12.252 rows=0.67 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 40kB
+                    Buffers: shared hit=564 read=11031
+                    ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..17150.55 rows=1 width=24) (actual time=7.881..12.220 rows=0.67 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 355555
+                          Buffers: shared hit=564 read=11031
+Planning:
+  Buffers: shared hit=269
+Planning Time: 0.397 ms
+Execution Time: 35.801 ms

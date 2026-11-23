@@ -1,0 +1,147 @@
+=== R25 run 1 ===
+Sort  (cost=61166.57..61166.59 rows=8 width=54) (actual time=194.309..197.135 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1714 read=22183, temp read=8276 written=8312
+  ->  Finalize GroupAggregate  (cost=61163.93..61166.45 rows=8 width=54) (actual time=194.292..197.125 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Buffers: shared hit=1711 read=22183, temp read=8276 written=8312
+        ->  Gather Merge  (cost=61163.93..61166.14 rows=19 width=54) (actual time=194.280..197.109 rows=24.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=1711 read=22183, temp read=8276 written=8312
+              ->  Sort  (cost=60163.90..60163.92 rows=8 width=54) (actual time=192.494..192.505 rows=8.00 loops=3)
+                    Sort Key: ba.bank_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=1711 read=22183, temp read=8276 written=8312
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=60163.68..60163.78 rows=8 width=54) (actual time=192.469..192.480 rows=8.00 loops=3)
+                          Group Key: ba.bank_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=1695 read=22183, temp read=8276 written=8312
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Hash Join  (cost=40559.62..58740.22 rows=113877 width=30) (actual time=136.534..180.704 rows=90911.67 loops=3)
+                                Hash Cond: (ba.account_id = v.account_id)
+                                Buffers: shared hit=1695 read=22183, temp read=8276 written=8312
+                                ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..16039.44 rows=444444 width=18) (actual time=0.055..9.670 rows=355555.33 loops=3)
+                                      Buffers: shared hit=846 read=10749
+                                ->  Parallel Hash  (cost=39136.16..39136.16 rows=113877 width=20) (actual time=136.341..136.351 rows=90911.67 loops=3)
+                                      Buckets: 524288  Batches: 1  Memory Usage: 19104kB
+                                      Buffers: shared hit=849 read=11434, temp read=8276 written=8312
+                                      ->  Parallel Hash Join  (cost=14221.45..39136.16 rows=113877 width=20) (actual time=90.237..127.942 rows=90911.67 loops=3)
+                                            Hash Cond: (v.vpa = t.payer_vpa)
+                                            Buffers: shared hit=849 read=11434, temp read=8276 written=8312
+                                            ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=30) (actual time=0.061..15.372 rows=355555.33 loops=3)
+                                                  Buffers: shared hit=846 read=9293
+                                            ->  Parallel Hash  (cost=11796.99..11796.99 rows=113877 width=41) (actual time=30.598..30.598 rows=90911.67 loops=3)
+                                                  Buckets: 131072  Batches: 4  Memory Usage: 6208kB
+                                                  Buffers: shared hit=3 read=2141, temp written=1560
+                                                  ->  Parallel Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.43..11796.99 rows=113877 width=41) (actual time=0.164..17.328 rows=90911.67 loops=3)
+                                                        Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                                        Heap Fetches: 0
+                                                        Index Searches: 1
+                                                        Buffers: shared hit=3 read=2141
+Planning:
+  Buffers: shared hit=672 read=18
+Planning Time: 1.151 ms
+Execution Time: 197.181 ms
+=== R25 run 2 ===
+Sort  (cost=61166.57..61166.59 rows=8 width=54) (actual time=175.277..177.736 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=4419 read=19478, temp read=8277 written=8308
+  ->  Finalize GroupAggregate  (cost=61163.93..61166.45 rows=8 width=54) (actual time=175.260..177.727 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Buffers: shared hit=4416 read=19478, temp read=8277 written=8308
+        ->  Gather Merge  (cost=61163.93..61166.14 rows=19 width=54) (actual time=175.244..177.708 rows=24.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=4416 read=19478, temp read=8277 written=8308
+              ->  Sort  (cost=60163.90..60163.92 rows=8 width=54) (actual time=173.616..173.617 rows=8.00 loops=3)
+                    Sort Key: ba.bank_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=4416 read=19478, temp read=8277 written=8308
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=60163.68..60163.78 rows=8 width=54) (actual time=173.591..173.593 rows=8.00 loops=3)
+                          Group Key: ba.bank_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=4400 read=19478, temp read=8277 written=8308
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Hash Join  (cost=40559.62..58740.22 rows=113877 width=30) (actual time=114.599..162.345 rows=90911.67 loops=3)
+                                Hash Cond: (ba.account_id = v.account_id)
+                                Buffers: shared hit=4400 read=19478, temp read=8277 written=8308
+                                ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..16039.44 rows=444444 width=18) (actual time=0.058..9.629 rows=355555.33 loops=3)
+                                      Buffers: shared hit=1128 read=10467
+                                ->  Parallel Hash  (cost=39136.16..39136.16 rows=113877 width=20) (actual time=114.404..114.405 rows=90911.67 loops=3)
+                                      Buckets: 524288  Batches: 1  Memory Usage: 19104kB
+                                      Buffers: shared hit=3272 read=9011, temp read=8277 written=8308
+                                      ->  Parallel Hash Join  (cost=14221.45..39136.16 rows=113877 width=20) (actual time=69.708..105.434 rows=90911.67 loops=3)
+                                            Hash Cond: (v.vpa = t.payer_vpa)
+                                            Buffers: shared hit=3272 read=9011, temp read=8277 written=8308
+                                            ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=30) (actual time=0.060..14.846 rows=355555.33 loops=3)
+                                                  Buffers: shared hit=1128 read=9011
+                                            ->  Parallel Hash  (cost=11796.99..11796.99 rows=113877 width=41) (actual time=14.511..14.511 rows=90911.67 loops=3)
+                                                  Buckets: 131072  Batches: 4  Memory Usage: 6240kB
+                                                  Buffers: shared hit=2144, temp written=1556
+                                                  ->  Parallel Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.43..11796.99 rows=113877 width=41) (actual time=0.019..5.075 rows=90911.67 loops=3)
+                                                        Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                                        Heap Fetches: 0
+                                                        Index Searches: 1
+                                                        Buffers: shared hit=2144
+Planning:
+  Buffers: shared hit=690
+Planning Time: 1.261 ms
+Execution Time: 177.788 ms
+=== R25 run 3 ===
+Sort  (cost=61166.57..61166.59 rows=8 width=54) (actual time=174.805..176.798 rows=8.00 loops=1)
+  Sort Key: (round(avg(EXTRACT(epoch FROM (t.completed_at - t.initiated_at))), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=4983 read=18914, temp read=8276 written=8308
+  ->  Finalize GroupAggregate  (cost=61163.93..61166.45 rows=8 width=54) (actual time=174.788..176.789 rows=8.00 loops=1)
+        Group Key: ba.bank_name
+        Buffers: shared hit=4980 read=18914, temp read=8276 written=8308
+        ->  Gather Merge  (cost=61163.93..61166.14 rows=19 width=54) (actual time=174.777..176.773 rows=24.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=4980 read=18914, temp read=8276 written=8308
+              ->  Sort  (cost=60163.90..60163.92 rows=8 width=54) (actual time=173.156..173.167 rows=8.00 loops=3)
+                    Sort Key: ba.bank_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=4980 read=18914, temp read=8276 written=8308
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=60163.68..60163.78 rows=8 width=54) (actual time=173.136..173.148 rows=8.00 loops=3)
+                          Group Key: ba.bank_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=4964 read=18914, temp read=8276 written=8308
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Hash Join  (cost=40559.62..58740.22 rows=113877 width=30) (actual time=115.000..161.741 rows=90911.67 loops=3)
+                                Hash Cond: (ba.account_id = v.account_id)
+                                Buffers: shared hit=4964 read=18914, temp read=8276 written=8308
+                                ->  Parallel Seq Scan on bank_accounts ba  (cost=0.00..16039.44 rows=444444 width=18) (actual time=0.048..9.803 rows=355555.33 loops=3)
+                                      Buffers: shared hit=1410 read=10185
+                                ->  Parallel Hash  (cost=39136.16..39136.16 rows=113877 width=20) (actual time=114.817..114.828 rows=90911.67 loops=3)
+                                      Buckets: 524288  Batches: 1  Memory Usage: 19104kB
+                                      Buffers: shared hit=3554 read=8729, temp read=8276 written=8308
+                                      ->  Parallel Hash Join  (cost=14221.45..39136.16 rows=113877 width=20) (actual time=72.468..106.398 rows=90911.67 loops=3)
+                                            Hash Cond: (v.vpa = t.payer_vpa)
+                                            Buffers: shared hit=3554 read=8729, temp read=8276 written=8308
+                                            ->  Parallel Seq Scan on vpas v  (cost=0.00..14583.44 rows=444444 width=30) (actual time=0.332..15.773 rows=355555.33 loops=3)
+                                                  Buffers: shared hit=1410 read=8729
+                                            ->  Parallel Hash  (cost=11796.99..11796.99 rows=113877 width=41) (actual time=16.284..16.284 rows=90911.67 loops=3)
+                                                  Buckets: 131072  Batches: 4  Memory Usage: 6240kB
+                                                  Buffers: shared hit=2144, temp written=1560
+                                                  ->  Parallel Index Only Scan using idx_transactions_completed_time on transactions t  (cost=0.43..11796.99 rows=113877 width=41) (actual time=0.022..5.658 rows=90911.67 loops=3)
+                                                        Index Cond: (initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                                        Heap Fetches: 0
+                                                        Index Searches: 1
+                                                        Buffers: shared hit=2144
+Planning:
+  Buffers: shared hit=690
+Planning Time: 1.238 ms
+Execution Time: 176.845 ms

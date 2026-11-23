@@ -1,0 +1,99 @@
+=== R14 run 1 ===
+Sort  (cost=73.00..73.01 rows=5 width=42) (actual time=1.396..1.397 rows=1.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=14 read=12
+  ->  GroupAggregate  (cost=72.83..72.94 rows=5 width=42) (actual time=1.388..1.388 rows=1.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=11 read=12
+        ->  Sort  (cost=72.83..72.84 rows=5 width=8) (actual time=1.374..1.374 rows=1.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=11 read=12
+              ->  Nested Loop  (cost=1.27..72.77 rows=5 width=8) (actual time=1.244..1.366 rows=1.00 loops=1)
+                    Buffers: shared hit=8 read=12
+                    ->  Nested Loop  (cost=0.98..70.00 rows=9 width=10) (actual time=0.946..1.154 rows=3.00 loops=1)
+                          Buffers: shared hit=7 read=10
+                          ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=26) (actual time=0.411..0.411 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=1 read=3
+                          ->  Index Scan using idx_transactions_success_pair_time on transactions t  (cost=0.56..32.70 rows=7 width=35) (actual time=0.265..0.368 rows=1.50 loops=2)
+                                Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2025-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Index Searches: 2
+                                Buffers: shared hit=6 read=7
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.29..0.31 rows=1 width=6) (actual time=0.070..0.070 rows=0.33 loops=3)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=2
+Planning:
+  Buffers: shared hit=777 read=26
+Planning Time: 2.794 ms
+Execution Time: 1.439 ms
+=== R14 run 2 ===
+Sort  (cost=73.00..73.01 rows=5 width=42) (actual time=0.049..0.049 rows=1.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=26
+  ->  GroupAggregate  (cost=72.83..72.94 rows=5 width=42) (actual time=0.043..0.043 rows=1.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=23
+        ->  Sort  (cost=72.83..72.84 rows=5 width=8) (actual time=0.037..0.037 rows=1.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=23
+              ->  Nested Loop  (cost=1.27..72.77 rows=5 width=8) (actual time=0.029..0.031 rows=1.00 loops=1)
+                    Buffers: shared hit=20
+                    ->  Nested Loop  (cost=0.98..70.00 rows=9 width=10) (actual time=0.023..0.026 rows=3.00 loops=1)
+                          Buffers: shared hit=17
+                          ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=26) (actual time=0.006..0.006 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=4
+                          ->  Index Scan using idx_transactions_success_pair_time on transactions t  (cost=0.56..32.70 rows=7 width=35) (actual time=0.008..0.009 rows=1.50 loops=2)
+                                Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2025-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Index Searches: 2
+                                Buffers: shared hit=13
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.29..0.31 rows=1 width=6) (actual time=0.001..0.001 rows=0.33 loops=3)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 1
+                          Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=803
+Planning Time: 1.169 ms
+Execution Time: 0.081 ms
+=== R14 run 3 ===
+Sort  (cost=73.00..73.01 rows=5 width=42) (actual time=0.044..0.044 rows=1.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=26
+  ->  GroupAggregate  (cost=72.83..72.94 rows=5 width=42) (actual time=0.039..0.039 rows=1.00 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=23
+        ->  Sort  (cost=72.83..72.84 rows=5 width=8) (actual time=0.034..0.034 rows=1.00 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=23
+              ->  Nested Loop  (cost=1.27..72.77 rows=5 width=8) (actual time=0.027..0.029 rows=1.00 loops=1)
+                    Buffers: shared hit=20
+                    ->  Nested Loop  (cost=0.98..70.00 rows=9 width=10) (actual time=0.020..0.023 rows=3.00 loops=1)
+                          Buffers: shared hit=17
+                          ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=26) (actual time=0.005..0.005 rows=2.00 loops=1)
+                                Index Cond: (user_id = 15177)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=4
+                          ->  Index Scan using idx_transactions_success_pair_time on transactions t  (cost=0.56..32.70 rows=7 width=35) (actual time=0.007..0.008 rows=1.50 loops=2)
+                                Index Cond: ((payer_vpa = v.vpa) AND (initiated_at >= '2025-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Index Searches: 2
+                                Buffers: shared hit=13
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.29..0.31 rows=1 width=6) (actual time=0.002..0.002 rows=0.33 loops=3)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Index Searches: 1
+                          Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=803
+Planning Time: 1.072 ms
+Execution Time: 0.072 ms

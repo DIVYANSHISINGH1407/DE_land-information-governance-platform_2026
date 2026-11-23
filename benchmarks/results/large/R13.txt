@@ -1,0 +1,42 @@
+=== R13 run 1 ===
+Nested Loop Anti Join  (cost=0.43..29779.64 rows=21468 width=28) (actual time=37.493..40.656 rows=9000.00 loops=1)
+  Buffers: shared hit=177558 read=3133
+  ->  Seq Scan on merchants m  (cost=0.00..1288.00 rows=60000 width=28) (actual time=0.163..2.239 rows=60000.00 loops=1)
+        Buffers: shared read=688
+  ->  Index Only Scan using idx_transactions_merchant_id_present on transactions t  (cost=0.43..1.87 rows=73 width=4) (actual time=0.001..0.001 rows=0.85 loops=60000)
+        Index Cond: (merchant_id = m.merchant_id)
+        Heap Fetches: 0
+        Index Searches: 60000
+        Buffers: shared hit=177558 read=2445
+Planning:
+  Buffers: shared hit=551 read=34
+Planning Time: 2.071 ms
+Execution Time: 40.840 ms
+=== R13 run 2 ===
+Nested Loop Anti Join  (cost=0.43..29779.64 rows=21468 width=28) (actual time=24.796..27.895 rows=9000.00 loops=1)
+  Buffers: shared hit=180691
+  ->  Seq Scan on merchants m  (cost=0.00..1288.00 rows=60000 width=28) (actual time=0.003..1.694 rows=60000.00 loops=1)
+        Buffers: shared hit=688
+  ->  Index Only Scan using idx_transactions_merchant_id_present on transactions t  (cost=0.43..1.87 rows=73 width=4) (actual time=0.000..0.000 rows=0.85 loops=60000)
+        Index Cond: (merchant_id = m.merchant_id)
+        Heap Fetches: 0
+        Index Searches: 60000
+        Buffers: shared hit=180003
+Planning:
+  Buffers: shared hit=585
+Planning Time: 0.792 ms
+Execution Time: 28.075 ms
+=== R13 run 3 ===
+Nested Loop Anti Join  (cost=0.43..29779.64 rows=21468 width=28) (actual time=24.312..27.411 rows=9000.00 loops=1)
+  Buffers: shared hit=180691
+  ->  Seq Scan on merchants m  (cost=0.00..1288.00 rows=60000 width=28) (actual time=0.003..1.634 rows=60000.00 loops=1)
+        Buffers: shared hit=688
+  ->  Index Only Scan using idx_transactions_merchant_id_present on transactions t  (cost=0.43..1.87 rows=73 width=4) (actual time=0.000..0.000 rows=0.85 loops=60000)
+        Index Cond: (merchant_id = m.merchant_id)
+        Heap Fetches: 0
+        Index Searches: 60000
+        Buffers: shared hit=180003
+Planning:
+  Buffers: shared hit=585
+Planning Time: 0.752 ms
+Execution Time: 27.587 ms

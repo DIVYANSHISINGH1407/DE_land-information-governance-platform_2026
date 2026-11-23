@@ -1,0 +1,30 @@
+=== R04 run 1 ===
+Index Only Scan using idx_transactions_pending_time on transactions  (cost=0.28..155.04 rows=2672 width=56) (actual time=0.672..1.192 rows=2399.00 loops=1)
+  Index Cond: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+  Heap Fetches: 0
+  Index Searches: 1
+  Buffers: shared hit=1 read=25
+Planning:
+  Buffers: shared hit=478
+Planning Time: 0.880 ms
+Execution Time: 1.256 ms
+=== R04 run 2 ===
+Index Only Scan using idx_transactions_pending_time on transactions  (cost=0.28..155.04 rows=2672 width=56) (actual time=0.006..0.155 rows=2399.00 loops=1)
+  Index Cond: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+  Heap Fetches: 0
+  Index Searches: 1
+  Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=478
+Planning Time: 0.809 ms
+Execution Time: 0.225 ms
+=== R04 run 3 ===
+Index Only Scan using idx_transactions_pending_time on transactions  (cost=0.28..155.04 rows=2672 width=56) (actual time=0.006..0.156 rows=2399.00 loops=1)
+  Index Cond: (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval))
+  Heap Fetches: 0
+  Index Searches: 1
+  Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=478
+Planning Time: 0.845 ms
+Execution Time: 0.227 ms

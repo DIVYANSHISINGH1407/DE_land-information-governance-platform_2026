@@ -1,0 +1,84 @@
+=== R17 run 1 ===
+Limit  (cost=92889.79..92889.84 rows=20 width=44) (actual time=133.328..133.345 rows=20.00 loops=1)
+  Buffers: shared hit=159469 read=10745 written=1
+  ->  Sort  (cost=92889.79..92921.90 rows=12844 width=44) (actual time=133.328..133.344 rows=20.00 loops=1)
+        Sort Key: (round(((100.0 * (count(*) FILTER (WHERE (status = 'REFUNDED'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=159469 read=10745 written=1
+        ->  Finalize HashAggregate  (cost=91905.81..92548.01 rows=12844 width=44) (actual time=123.684..130.690 rows=47418.00 loops=1)
+              Group Key: merchant_id
+              Filter: (count(*) >= 30)
+              Batches: 1  Memory Usage: 3865kB
+              Rows Removed by Filter: 3582
+              Buffers: shared hit=159466 read=10745 written=1
+              ->  Gather  (cost=1000.43..91212.24 rows=92477 width=20) (actual time=1.103..116.142 rows=61386.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=159466 read=10745 written=1
+                    ->  Partial GroupAggregate  (cost=0.43..80964.54 rows=38532 width=20) (actual time=0.395..116.683 rows=20462.00 loops=3)
+                          Group Key: merchant_id
+                          Buffers: shared hit=159466 read=10745 written=1
+                          ->  Parallel Index Only Scan using idx_transactions_p2m_merchant_status on transactions  (cost=0.43..68895.85 rows=1168337 width=11) (actual time=0.128..84.268 rows=934558.00 loops=3)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=159466 read=10745 written=1
+Planning:
+  Buffers: shared hit=438 read=1
+Planning Time: 0.940 ms
+Execution Time: 133.472 ms
+=== R17 run 2 ===
+Limit  (cost=92889.79..92889.84 rows=20 width=44) (actual time=108.541..108.555 rows=20.00 loops=1)
+  Buffers: shared hit=160460 read=9854
+  ->  Sort  (cost=92889.79..92921.90 rows=12844 width=44) (actual time=108.541..108.554 rows=20.00 loops=1)
+        Sort Key: (round(((100.0 * (count(*) FILTER (WHERE (status = 'REFUNDED'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=160460 read=9854
+        ->  Finalize HashAggregate  (cost=91905.81..92548.01 rows=12844 width=44) (actual time=98.810..105.991 rows=47418.00 loops=1)
+              Group Key: merchant_id
+              Filter: (count(*) >= 30)
+              Batches: 1  Memory Usage: 3865kB
+              Rows Removed by Filter: 3582
+              Buffers: shared hit=160457 read=9854
+              ->  Gather  (cost=1000.43..91212.24 rows=92477 width=20) (actual time=0.438..91.258 rows=61423.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=160457 read=9854
+                    ->  Partial GroupAggregate  (cost=0.43..80964.54 rows=38532 width=20) (actual time=0.170..93.365 rows=20474.33 loops=3)
+                          Group Key: merchant_id
+                          Buffers: shared hit=160457 read=9854
+                          ->  Parallel Index Only Scan using idx_transactions_p2m_merchant_status on transactions  (cost=0.43..68895.85 rows=1168337 width=11) (actual time=0.042..58.155 rows=934558.00 loops=3)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=160457 read=9854
+Planning:
+  Buffers: shared hit=438 read=1
+Planning Time: 0.627 ms
+Execution Time: 108.652 ms
+=== R17 run 3 ===
+Limit  (cost=92889.79..92889.84 rows=20 width=44) (actual time=87.100..87.112 rows=20.00 loops=1)
+  Buffers: shared hit=170240
+  ->  Sort  (cost=92889.79..92921.90 rows=12844 width=44) (actual time=87.100..87.111 rows=20.00 loops=1)
+        Sort Key: (round(((100.0 * (count(*) FILTER (WHERE (status = 'REFUNDED'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=170240
+        ->  Finalize HashAggregate  (cost=91905.81..92548.01 rows=12844 width=44) (actual time=77.572..84.465 rows=47418.00 loops=1)
+              Group Key: merchant_id
+              Filter: (count(*) >= 30)
+              Batches: 1  Memory Usage: 3865kB
+              Rows Removed by Filter: 3582
+              Buffers: shared hit=170237
+              ->  Gather  (cost=1000.43..91212.24 rows=92477 width=20) (actual time=0.412..71.222 rows=61424.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=170237
+                    ->  Partial GroupAggregate  (cost=0.43..80964.54 rows=38532 width=20) (actual time=0.139..72.655 rows=20474.67 loops=3)
+                          Group Key: merchant_id
+                          Buffers: shared hit=170237
+                          ->  Parallel Index Only Scan using idx_transactions_p2m_merchant_status on transactions  (cost=0.43..68895.85 rows=1168337 width=11) (actual time=0.025..41.821 rows=934558.00 loops=3)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=170237
+Planning:
+  Buffers: shared hit=439
+Planning Time: 0.641 ms
+Execution Time: 87.201 ms
