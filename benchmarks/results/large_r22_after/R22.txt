@@ -1,0 +1,78 @@
+=== R22 run 1 ===
+Sort  (cost=9.00..9.01 rows=2 width=47) (actual time=0.129..0.129 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=13
+  ->  Nested Loop Left Join  (cost=0.85..8.99 rows=2 width=47) (actual time=0.106..0.109 rows=2.00 loops=1)
+        Join Filter: (v.account_id = ba.account_id)
+        Rows Removed by Join Filter: 2
+        Buffers: shared hit=8
+        ->  Index Only Scan using idx_bank_accounts_user_id_cover on bank_accounts ba  (cost=0.43..4.46 rows=2 width=28) (actual time=0.013..0.014 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Materialize  (cost=0.43..4.47 rows=2 width=35) (actual time=0.044..0.045 rows=2.00 loops=2)
+              Storage: Memory  Maximum Storage: 17kB
+              Buffers: shared hit=4
+              ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=35) (actual time=0.085..0.086 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=294
+Planning Time: 0.823 ms
+Execution Time: 0.191 ms
+=== R22 run 2 ===
+Sort  (cost=9.00..9.01 rows=2 width=47) (actual time=0.087..0.087 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=13
+  ->  Nested Loop Left Join  (cost=0.85..8.99 rows=2 width=47) (actual time=0.070..0.073 rows=2.00 loops=1)
+        Join Filter: (v.account_id = ba.account_id)
+        Rows Removed by Join Filter: 2
+        Buffers: shared hit=8
+        ->  Index Only Scan using idx_bank_accounts_user_id_cover on bank_accounts ba  (cost=0.43..4.46 rows=2 width=28) (actual time=0.009..0.009 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Materialize  (cost=0.43..4.47 rows=2 width=35) (actual time=0.029..0.030 rows=2.00 loops=2)
+              Storage: Memory  Maximum Storage: 17kB
+              Buffers: shared hit=4
+              ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=35) (actual time=0.055..0.056 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=294
+Planning Time: 0.710 ms
+Execution Time: 0.136 ms
+=== R22 run 3 ===
+Sort  (cost=9.00..9.01 rows=2 width=47) (actual time=0.063..0.064 rows=2.00 loops=1)
+  Sort Key: ba.is_primary DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=13
+  ->  Nested Loop Left Join  (cost=0.85..8.99 rows=2 width=47) (actual time=0.053..0.054 rows=2.00 loops=1)
+        Join Filter: (v.account_id = ba.account_id)
+        Rows Removed by Join Filter: 2
+        Buffers: shared hit=8
+        ->  Index Only Scan using idx_bank_accounts_user_id_cover on bank_accounts ba  (cost=0.43..4.46 rows=2 width=28) (actual time=0.007..0.007 rows=2.00 loops=1)
+              Index Cond: (user_id = 15177)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Materialize  (cost=0.43..4.47 rows=2 width=35) (actual time=0.022..0.022 rows=2.00 loops=2)
+              Storage: Memory  Maximum Storage: 17kB
+              Buffers: shared hit=4
+              ->  Index Only Scan using idx_vpas_user_id_cover on vpas v  (cost=0.43..4.46 rows=2 width=35) (actual time=0.041..0.042 rows=2.00 loops=1)
+                    Index Cond: (user_id = 15177)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=294
+Planning Time: 0.565 ms
+Execution Time: 0.098 ms

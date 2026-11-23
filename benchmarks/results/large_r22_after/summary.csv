@@ -1,0 +1,2 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R22,READ,0.142,0.136,0.098,0.191,Index Only Scan using idx_bank_accounts_user_id_cover on bank_accounts | Index Only Scan using idx_vpas_user_id_cover on vpas

@@ -233,7 +233,7 @@ LIMIT 25;
 -- Payment screen: user 15177's primary bank account and all their UPI IDs
 SELECT ba.bank_name, ba.account_last4, ba.is_primary, v.vpa, v.is_active
 FROM bank_accounts ba
-LEFT JOIN vpas v ON v.account_id = ba.account_id
+LEFT JOIN vpas v ON v.account_id = ba.account_id AND v.user_id = ba.user_id
 WHERE ba.user_id = 15177
 ORDER BY ba.is_primary DESC;
 
